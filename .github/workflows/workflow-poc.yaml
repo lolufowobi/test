@@ -22,10 +22,12 @@ jobs:
       - name: run creates.sh script
         run: ./dev/team1/create.sh
 
-      - name: Commit and Push Changes
-        run: |
-          git config user.name 'github-actions'
-          git config user.email 'github-actions@github.com'
+      - uses: actions/checkout@v4
+      - run: |
+          date > generated.txt
+          # Note: the following account information will not work on GHES
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit --verbose -m "Automated commit by GitHub Actions"
-          git push 
+          git commit -m "generated"
+          git push
