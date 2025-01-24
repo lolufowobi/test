@@ -14,6 +14,8 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      has-changes: ${{ steps.check_diff.outputs.has_changes }}
 
     steps:
       - name: Checkout Code
@@ -30,13 +32,14 @@ jobs:
         run: |
           git status --porcelain
 
-      - name: check diff exists
-        id: check-diff-exists
+      - name: Check for changes
+        id: check_diff
         run: |
-          git diff --quiet 
-          has_changes=$?
-          echo $has_changes
-          echo "diff_exists=$has_changes" >> "$GITHUB_OUTPUT"
+          if [ -n "$(git diff HEAD^ HEAD)" ]; then
+            echo "has_changes=true" >> $GITHUB_ENV
+          else
+            echo "has_changes=false" >> $GITHUB_ENV
+          fi
 
       - name: Git commit and push
         if: steps.check-diff-exists.outputs.diff-exists == '1'
@@ -46,4 +49,3 @@ jobs:
           git add .
           git commit -m "AUTOCOMMIT: Regenerate job manifest on site config changes"
           git push
-        
