@@ -1,0 +1,30 @@
+name: poc
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'dev/team1/**'
+  #just for testing
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install yq
+        run: sudo apt-get update && sudo apt-get install -y yq
+
+      - name: run creates.sh script
+        run: ./dev/team1/creates.sh
+
+      - name: Commit and Push Changes
+        run: |
+          git add .
+          git commit -m "Automated commit by GitHub Actions"
+          git push origin master
+
