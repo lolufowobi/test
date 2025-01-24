@@ -20,7 +20,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y yq
 
       - name: run creates.sh script
-        run: ./dev/team1/creates.sh
+        run: ./dev/team1/create.sh
 
       - name: Commit and Push Changes
         run: |
