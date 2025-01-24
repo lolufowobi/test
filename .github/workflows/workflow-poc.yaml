@@ -23,9 +23,24 @@ jobs:
         run: ./dev/team1/create.sh
 
 
-      - run: |
+      - name: Git status
+        run: |
+          git status --porcelain
+
+      - name: check diff exists
+        id: check-diff-exists
+        run: |
+          git diff --exit-code
+          has_changes=$?
+          echo $has_changes
+          echo "diff_exists=$has_changes" >> "$GITHUB_OUTPUT"
+
+      - name: Git commit and push
+        if: steps.check-diff-exists.outputs.diff-exists == '1'
+        run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .
           git commit -m "generated"
           git push
+        
