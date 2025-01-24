@@ -16,8 +16,8 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Install yq
-        run: sudo apt-get update && sudo snap install yq
+      - name: install yq
+        run: sudo snap install yq
 
       - name: run creates.sh script
         run: ./dev/team1/create.sh
