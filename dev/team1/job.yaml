@@ -13,4 +13,4 @@ spec:
       - name: echo-container
         image: busybox
         imagePullPolicy: Always
-        command: ["echo", "Hello, world1!"]
+        command: ["echo", "Hello, world2!"]
