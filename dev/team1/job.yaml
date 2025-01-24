@@ -13,4 +13,4 @@ spec:
       - name: echo-container
         image: busybox
         imagePullPolicy: Always
-        command: ["echo", "Hello, Kubernetes!"]
+        command: ["echo", "Hello, world!"]
