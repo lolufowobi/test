@@ -1,5 +1,10 @@
 name: manual-manifest-job-generation
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'dev/team1/**'
   workflow_dispatch:
 
 permissions:
