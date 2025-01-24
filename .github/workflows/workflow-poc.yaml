@@ -33,7 +33,7 @@ jobs:
       - name: check diff exists
         id: check-diff-exists
         run: |
-          git diff --exit-code
+          git diff --quiet 
           has_changes=$?
           echo $has_changes
           echo "diff_exists=$has_changes" >> "$GITHUB_OUTPUT"
