@@ -27,5 +27,5 @@ jobs:
           git config user.name 'github-actions'
           git config user.email 'github-actions@github.com'
           git add .
-          git commit -m "Automated commit by GitHub Actions"
-          git push origin main
+          git commit --verbose -m "Automated commit by GitHub Actions"
+          git push 
