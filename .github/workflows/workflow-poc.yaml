@@ -3,8 +3,8 @@ on:
   push:
     branches:
       - main
-#    paths:
-#      - 'dev/team1/**'
+    paths:
+      - 'dev/team1/**'
   #just for testing
   workflow_dispatch:
 
