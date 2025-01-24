@@ -1,0 +1,16 @@
+#This is a sample k8s job
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: echo-job
+  namespace: default
+spec:
+  backoffLimit: 3
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: echo-container
+        image: busybox
+        imagePullPolicy: Always
+        command: ["echo", "Hello, Kubernetes!"]
