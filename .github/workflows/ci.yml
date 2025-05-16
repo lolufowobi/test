@@ -21,6 +21,8 @@ jobs:
   promote-docker-image:
     runs-on: ubuntu-latest
 
+
+
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event.inputs.promote == 'true' }}
     steps:
       - name: Checkout Code
@@ -28,7 +30,10 @@ jobs:
         with:
           fetch-depth: 0
 
-
+      - name: Get Next Version
+        id: get_next_version
+        run: |
+          echo "next_version=1.0.0" >> $GITHUB_OUTPUT
 
       - name: Create Docker Tag
         id: create_docker_tag
@@ -37,9 +42,9 @@ jobs:
           CLEANED_BRANCH_NAME=$(echo "${GITHUB_REF_NAME}" | sed 's/[^a-zA-Z0-9._-]/-/g')
           TAG_SUFFIX=""
           if [ "${GITHUB_REF_NAME}" != "main" ]; then
-            TAG_SUFFIX="${CLEANED_BRANCH_NAME}"
+            TAG_SUFFIX="${CLEANED_BRANCH_NAME}-"
           fi
-          echo "docker_tag=${TAG_SUFFIX}-${{ steps.get_next_version.outputs.next_version }}" >> $GITHUB_OUTPUT
+          echo "docker_tag=${TAG_SUFFIX}${{ steps.get_next_version.outputs.next_version }}" >> $GITHUB_OUTPUT
 
       - name: Promote to Docker Image Registry
         run: |
