@@ -52,7 +52,6 @@ jobs:
           echo "Docker tag: ${{ steps.create_docker_tag.outputs.docker_tag }}"
 
 
-
       - name: Get Tag and SHA
         id: get_git_tag_sha
         shell: bash
