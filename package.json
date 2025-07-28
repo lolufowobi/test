@@ -9,7 +9,7 @@
   "author": "Reaktor (https://reaktor.com)",
   "license": "UNLICENSED",
   "dependencies": {
-    "debug": "2.6.8"
+    "marked": "0.3.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.12.0",
