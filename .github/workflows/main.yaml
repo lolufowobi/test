@@ -1,0 +1,9 @@
+name: Pull Request Validation
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  ci-test:
+    uses: ./.github/workflows/ci-test.yaml
+    secrets: inherit
