@@ -1,0 +1,21 @@
+name: Promote
+env:
+  SERVICE_NAME: ter
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  ci-test:
+    uses: ./.github/workflows/ci-test.yaml
+    secrets: inherit
+
+  promote:
+    needs: ci-test
+    runs-on: mobility-engineering-runner-set
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0

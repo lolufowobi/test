@@ -1,0 +1,48 @@
+name: Pull Request Validation
+env:
+  SERVICE_NAME: ter
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - main
+
+jobs:
+  trivy-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker Image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64
+          tags: ${{ env.SERVICE_NAME }}
+          push: false
+          load: true
+
+      - name: Scan Image with Trivy
+        id: trivy_scan
+        uses: aquasecurity/trivy-action@0.20.0
+        with:
+          image-ref: ${{ env.SERVICE_NAME }}
+          format: sarif
+          exit-code: 1
+          vuln-type: os,library
+          scan-type: image
+          severity: CRITICAL,HIGH
+          ignore-unfixed: true
+          output: trivy-results.sarif
+          limit-severities-for-sarif: true
+
+      - name: Upload Trivy Scan Results
+        uses: github/codeql-action/upload-sarif@v3
+        if: ${{ !cancelled() }}
+        with:
+          sarif_file: trivy-results.sarif
