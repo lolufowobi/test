@@ -10,6 +10,7 @@ on:
     branches:
       - main
 
+
 jobs:
   trivy-scan:
     runs-on: ubuntu-latest

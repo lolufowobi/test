@@ -7,7 +7,7 @@
     "dev": "node index.js",
     "test": "echo \"Error: no test specified\" "
   },
-  "license": "Apache-2.0",
+  "license": "MS-PL",
   "dependencies": {
   },
   "devDependencies": {
