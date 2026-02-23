@@ -5,7 +5,7 @@ on: [ workflow_call ]
 
 jobs:
   run-cats:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     outputs:
       catName: ${{ steps.run-cats.outputs.catName }}
 
