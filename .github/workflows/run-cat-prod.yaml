@@ -10,10 +10,12 @@ jobs:
   run-cats:
     name: run-cats-${{ inputs.catType }}
     runs-on: self-hosted
+    environment: prod
 
     outputs:
       catName: ${{ steps.run-cats.outputs.catName }}
       outcome: ${{ steps.run-cats.outcome }}
+      channel: ${{ vars.CHANNEL_NAME }}
 
     steps:
       - uses: actions/checkout@v4
@@ -26,7 +28,6 @@ jobs:
 
   notify-dogs:
     needs: [ run-cats ]
-    environment: prod
     name: notify-dogs-${{ inputs.catType }}
     runs-on: self-hosted
     steps:
@@ -36,4 +37,4 @@ jobs:
         with:
           catName: ${{ needs.run-cats.outputs.catName }}
           generationOutcome: ${{ needs.run-cats.outputs.outcome }}
-          channel: ${{ vars.CHANNEL_NAME }}
+          channel: ${{ needs.run-cats.outputs.channel }}

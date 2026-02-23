@@ -12,6 +12,7 @@ jobs:
     outputs:
       catName: ${{ steps.run-cats.outputs.catName }}
       outcome: ${{ steps.run-cats.outcome }}
+      channel: ${{ vars.CHANNEL_NAME }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -28,5 +29,5 @@ jobs:
     uses: "./.github/workflows/notify-dogs.yaml"
     with:
       catName: ${{ needs.run-cats.outputs.catName }}
-      generationOutcome: ${{ needs.run-cats.outcome }}
-      channel: ${{ vars.CHANNEL_NAME }}
+      generationOutcome: ${{ needs.run-cats.outputs.outcome }}
+      channel: ${{ needs.run-cats.outputs.channel }}
