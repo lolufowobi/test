@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 //This is a silly tool that returns a random cat name from a list of cat names. It is meant to be used as a fun way to generate cat names for people who are looking for inspiration.
 //it uses github action lib to output the catName as an output variable that can be used in other steps of the workflow.
 import * as core from "@actions/core";
