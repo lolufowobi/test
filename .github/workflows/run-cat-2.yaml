@@ -16,7 +16,7 @@ jobs:
 
       - name: run-cats
         id: run-cats
-        uses: ./.github/action/run-cats.yaml
+        uses: ./.github/actions/run-cats
         with:
           catType: tiger
 
