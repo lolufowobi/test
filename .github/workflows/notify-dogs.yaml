@@ -2,9 +2,13 @@ name: notify-dogs.yaml
 on:
   workflow_call:
     inputs:
-      catName:
+      generationOutcome:
         type: string
         required: true
+        description: Outcome of the cat name generation job (e.g., success, failure)
+      catName:
+        type: string
+        required: false
         description: Name of the cat
 
 jobs:
@@ -12,4 +16,11 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: notify-dogs
-        run: echo "The cat's name is ${{ inputs.catName }}. Woof!"
+        shell: bash
+        run: |
+            if [ "${{ inputs.generationOutcome }}" == "success" ]; then
+                echo "Cat name generation successful: ${{ inputs.catName }}"
+            else
+                echo "Cat name generation failed."
+            fi
+

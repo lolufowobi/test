@@ -1,6 +1,8 @@
 name: sync
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   run-all-cats:

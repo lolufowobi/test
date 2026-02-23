@@ -1,4 +1,4 @@
-name: run-cat-1
+name: run-cat-dev
 
 on: [ workflow_call ]
 
@@ -10,13 +10,14 @@ jobs:
         catType: [lion, tiger, panther, lynx]
     outputs:
       catName: ${{ steps.run-cats.outputs.catName }}
+      outcome: ${{ steps.run-cats.outcome }}
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.ref_name }}
       - name: run-cats
         id: run-cats
-        uses: ./.github/actions/run-cats
+        uses: ./.github/actions/cat-name-generator
         with:
           catType: ${{ matrix.catType }}
 
@@ -26,3 +27,4 @@ jobs:
     uses: "./.github/workflows/notify-dogs.yaml"
     with:
       catName: ${{ needs.run-cats.outputs.catName }}
+      generationOutcome: ${{ needs.run-cats.outcome }}
