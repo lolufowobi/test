@@ -8,6 +8,7 @@ on:
 
 jobs:
   run-cats:
+    name: run-cats-${{ inputs.catType }}
     runs-on: self-hosted
 
     outputs:
