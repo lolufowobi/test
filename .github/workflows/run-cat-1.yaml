@@ -9,7 +9,7 @@ jobs:
       matrix:
         catType: [lion, tiger, panther, lynx]
     outputs:
-      catName: ${{ steps.run-cats.outputs.catName }}
+      catName-${{ matrix.catType }}: ${{ steps.run-cats.outputs.catName }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -21,8 +21,11 @@ jobs:
           catType: ${{ matrix.catType }}
 
   notify-dogs:
-    needs: [ run-cats ]
-    if: always()
+    needs: run-cats
+    runs-on: self-hosted
+    strategy:
+      matrix:
+        catType: [lion, tiger, panther, lynx]
     uses: "./.github/workflows/notify-dogs.yaml"
     with:
-      catName: ${{ needs.run-cats.outputs.catName }}
+      catName: ${{ needs.run-cats.outputs[format('catName-{0}', matrix.catType)] }}
