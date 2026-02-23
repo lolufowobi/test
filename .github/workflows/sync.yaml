@@ -1,0 +1,8 @@
+name: sync
+on:
+  workflow_dispatch:
+
+jobs:
+  run-all-cats:
+    uses: "./.github/workflows/run-all-cats.yaml"
+    secrets: inherit

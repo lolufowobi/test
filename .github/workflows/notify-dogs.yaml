@@ -1,0 +1,15 @@
+name: notify-dogs.yaml
+on:
+  workflow_call:
+    inputs:
+      catName:
+        type: string
+        required: true
+        description: Name of the cat
+
+jobs:
+  notify-dogs:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: notify-dogs
+        run: echo "The cat's name is ${{ inputs.catName }}. Woof!"

@@ -1,0 +1,28 @@
+name: run-cat-1
+
+on: [ workflow_call ]
+
+jobs:
+  run-cats:
+    runs-on: ubuntu-latest
+    outputs:
+      catName: ${{ steps.run-cats.outputs.catName }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: run-cats
+        id: run-cats
+        uses: ./.github/action/run-cats.yaml
+        with:
+          catType: lion
+
+
+  notify-dogs:
+    needs: [ run-cats ]
+    if: always()
+    uses: "./.github/workflows/notify-dogs.yaml"
+    with:
+      catName: ${{ needs.run-cats.outputs.catName }}

@@ -1,0 +1,12 @@
+name: run-all-cats
+
+on: [ workflow_call ]
+
+jobs:
+  cat1:
+    uses: './.github/workflows/run-cat-1.yaml'
+    secrets: inherit
+
+  cat2:
+    uses: './.github/workflows/run-cat-2.yaml'
+    secrets: inherit

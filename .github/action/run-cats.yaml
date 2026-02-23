@@ -1,0 +1,12 @@
+name: 'run-cats'
+description: 'This action runs the cat script for a given cat type.'
+inputs:
+    catType:
+        type: string
+        description: Type of cat to run (e.g., lion, tiger, etc.)
+outputs:
+    catName:
+        description: "The generated cat name"
+runs:
+  using: 'node24'
+  main: './../../../index.js'

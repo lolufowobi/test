@@ -1,0 +1,29 @@
+# This workflow runs the cat2 job, which generates a cat name for a tiger and notifies dogs.
+name: run-cat-2
+
+on: [ workflow_call ]
+
+jobs:
+  run-cats:
+    runs-on: ubuntu-latest
+    outputs:
+      catName: ${{ steps.run-cats.outputs.catName }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: run-cats
+        id: run-cats
+        uses: ./.github/action/run-cats.yaml
+        with:
+          catType: tiger
+
+
+  notify-dogs:
+    needs: [ run-cats ]
+    if: always()
+    uses: "./.github/workflows/notify-dogs.yaml"
+    with:
+      catName: ${{ needs.run-cats.outputs.catName }}
