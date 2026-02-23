@@ -5,6 +5,8 @@ on:
     inputs:
       catType:
         type: string
+      path:
+        type: string
 
 jobs:
   run-cats:
@@ -24,17 +26,14 @@ jobs:
         uses: ./.github/actions/cat-name-generator
         with:
           catType: ${{ inputs.catType }}
-
+          path: ${{ inputs.path }}
 
   notify-dogs:
     needs: [ run-cats ]
     name: notify-dogs-${{ inputs.catType }}
-    runs-on: self-hosted
-    steps:
-      - name: notify-dogs
-        if: always()
-        uses: ./.github/workflows/notify-dogs.yaml
-        with:
-          catName: ${{ needs.run-cats.outputs.catName }}
-          generationOutcome: ${{ needs.run-cats.outputs.outcome }}
-          channel: ${{ needs.run-cats.outputs.channel }}
+    if: always()
+    uses: ./.github/workflows/notify-dogs.yaml
+    with:
+      catName: ${{ needs.run-cats.outputs.catName }}
+      generationOutcome: ${{ needs.run-cats.outputs.outcome }}
+      channel: ${{ needs.run-cats.outputs.channel }}

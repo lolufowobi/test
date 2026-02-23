@@ -4,13 +4,18 @@ on: [ workflow_call ]
 
 jobs:
   cat-dev:
-    uses: './.github/workflows/run-cat-dev.yaml'
+    uses: ./.github/workflows/run-cat-dev.yaml
     secrets: inherit
   cat-prod:
     strategy:
       matrix:
-        catType: [lion, tiger, panther, lynx]
-    uses: './.github/workflows/run-cat-prod.yaml'
+        include:
+          - catType: lion
+            path: './somepath/lion'
+          - catType: tiger
+            path: './somepath/tiger'
+    uses: ./.github/workflows/run-cat-prod.yaml
     with:
       catType: ${{ matrix.catType }}
+      path: ${{ matrix.path }}
     secrets: inherit

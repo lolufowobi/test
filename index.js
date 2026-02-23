@@ -28,6 +28,8 @@ function getRandomCatName() {
 
 try {
   const catType = core.getInput("catType");
+  const path = core.getInput("path");
+  console.log("path", path);
   if (!catType) {
     throw new Error("catType input is required");
   }
