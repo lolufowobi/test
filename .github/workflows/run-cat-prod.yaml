@@ -7,7 +7,6 @@ on:
         type: string
 
 jobs:
-
   run-cats:
     name: run-cats-${{ inputs.catType }}
     runs-on: self-hosted
