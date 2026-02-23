@@ -7,6 +7,7 @@ on:
         type: string
 
 jobs:
+
   run-cats:
     name: run-cats-${{ inputs.catType }}
     runs-on: self-hosted
@@ -26,9 +27,14 @@ jobs:
 
   notify-dogs:
     needs: [ run-cats ]
+    environment: prod
     name: notify-dogs-${{ inputs.catType }}
-    if: always()
-    uses: ./.github/workflows/notify-dogs.yaml
-    with:
-      catName: ${{ needs.run-cats.outputs.catName }}
-      generationOutcome: ${{ needs.run-cats.outputs.outcome }}
+    runs-on: self-hosted
+    steps:
+      - name: notify-dogs
+        if: always()
+        uses: ./.github/workflows/notify-dogs.yaml
+        with:
+          catName: ${{ needs.run-cats.outputs.catName }}
+          generationOutcome: ${{ needs.run-cats.outputs.outcome }}
+          channel: ${{ vars.CHANNEL_NAME }}

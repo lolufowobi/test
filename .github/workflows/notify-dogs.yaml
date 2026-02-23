@@ -10,6 +10,10 @@ on:
         type: string
         required: false
         description: Name of the cat
+      channel:
+        type: string
+        required: true
+        description: Channel to send the notification to
 
 jobs:
   notify-dogs:
@@ -19,7 +23,7 @@ jobs:
         shell: bash
         run: |
             if [ "${{ inputs.generationOutcome }}" == "success" ]; then
-                echo "Cat name generation successful: ${{ inputs.catName }}"
+                echo "Cat name:  ${{ inputs.catName }} sent to channel: ${{ inputs.channel }}"
             else
                 echo "Cat name generation failed."
             fi

@@ -5,6 +5,7 @@ on: [ workflow_call ]
 jobs:
   run-cats:
     runs-on: self-hosted
+    environment: dev
     strategy:
       matrix:
         catType: [lion, tiger, panther, lynx]
@@ -25,6 +26,8 @@ jobs:
     needs: [ run-cats ]
     if: always()
     uses: "./.github/workflows/notify-dogs.yaml"
+    environment: dev
     with:
       catName: ${{ needs.run-cats.outputs.catName }}
       generationOutcome: ${{ needs.run-cats.outcome }}
+      channel: ${{ vars.CHANNEL_NAME }}
