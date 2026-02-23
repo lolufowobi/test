@@ -9,4 +9,4 @@ outputs:
         description: "The generated cat name"
 runs:
   using: 'node24'
-  main: './../../index.js'
+  main: './../../../dist/run.js'
