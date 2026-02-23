@@ -5,20 +5,20 @@ on: [ workflow_call ]
 jobs:
   run-cats:
     runs-on: self-hosted
+    strategy:
+      matrix:
+        catType: [lion, tiger, panther, lynx]
     outputs:
       catName: ${{ steps.run-cats.outputs.catName }}
-
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.ref_name }}
-
       - name: run-cats
         id: run-cats
         uses: ./.github/actions/run-cats
         with:
-          catType: lion
-
+          catType: ${{ matrix.catType }}
 
   notify-dogs:
     needs: [ run-cats ]

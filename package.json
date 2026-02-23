@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node index.js",
     "test": "echo \"Error: no test specified\" ",
-    "build": "esbuild index.js --bundle --platform=node --outfile=dist/run.js --format=cjs",
+    "build": "esbuild index.js --bundle --platform=node --outfile=dist/run.cjs --format=cjs",
     "clean": "rm -rf dist"
   },
   "license": "Apache-2.0",

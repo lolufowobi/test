@@ -9,7 +9,7 @@ on:
 
 jobs:
   notify-dogs:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: notify-dogs
         run: echo "The cat's name is ${{ inputs.catName }}. Woof!"

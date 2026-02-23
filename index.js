@@ -31,6 +31,7 @@ try {
   if (!catType) {
     throw new Error("catType input is required");
   }
+  console.log("running for catType", catType);
   const catName = getRandomCatName();
   core.setOutput("catName", catName+" the "+catType);
 } catch (error) {
