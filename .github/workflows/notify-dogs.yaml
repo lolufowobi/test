@@ -9,7 +9,7 @@ on:
 
 jobs:
   notify-dogs:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: notify-dogs
         run: echo "The cat's name is ${{ inputs.catName }}. Woof!"

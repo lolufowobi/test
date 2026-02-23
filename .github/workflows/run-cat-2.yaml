@@ -1,11 +1,15 @@
-# This workflow runs the cat2 job, which generates a cat name for a tiger and notifies dogs.
 name: run-cat-2
 
-on: [ workflow_call ]
+on:
+  workflow_call:
+    inputs:
+      catType:
+        type: string
 
 jobs:
   run-cats:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
+
     outputs:
       catName: ${{ steps.run-cats.outputs.catName }}
 
@@ -18,7 +22,7 @@ jobs:
         id: run-cats
         uses: ./.github/actions/run-cats
         with:
-          catType: tiger
+          catType: ${{ inputs.catType }}
 
 
   notify-dogs:

@@ -4,14 +4,13 @@ on: [ workflow_call ]
 
 jobs:
   cat1:
+    uses: './.github/workflows/run-cat-1.yaml'
+    secrets: inherit
+  cat2:
     strategy:
       matrix:
         catType: [lion, tiger, panther, lynx]
-    uses: './.github/workflows/run-cat-1.yaml'
+    uses: './.github/workflows/run-cat-2.yaml'
     with:
       catType: ${{ matrix.catType }}
-    secrets: inherit
-
-  cat2:
-    uses: './.github/workflows/run-cat-2.yaml'
     secrets: inherit
