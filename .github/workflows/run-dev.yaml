@@ -3,17 +3,10 @@ name: run-deployment-dev
 on: [ workflow_call ]
 
 jobs:
-  prepare:
-    runs-on: self-hosted
-    environment: dev
-    steps:
-      - uses: actions/checkout@v4
 
-      - name: Print checkout done
-        run: echo "Checkout completed successfully."
 
   run-deployments:
-    needs: [ prepare ]
+
     runs-on: self-hosted
     environment: dev
     strategy:
@@ -26,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: run-deployments
+      - name: run-dev-deployments
         id: run-dev-deployments
         uses: ./.github/actions/name-generator
         with:
