@@ -3,26 +3,28 @@ name: run-deployment-dev
 on: [ workflow_call ]
 
 jobs:
+  prepare:
+    runs-on: self-hosted
+    environment: dev
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Print checkout done
+        run: echo "Checkout completed successfully."
+
   run-deployments:
+    needs: [ prepare ]
     runs-on: self-hosted
     environment: dev
     strategy:
       matrix:
         deploymentType: [v1,v2,v3,v4]
     outputs:
-      deploymentName: ${{ steps.run-deployments.outputs.deploymentName }}
-      outcome: ${{ steps.run-deployments.outcome }}
+      deploymentName: ${{ steps.run-dev-deployments.outputs.deploymentName }}
+      outcome: ${{ steps.run-dev-deployments.outcome }}
       channel: ${{ vars.CHANNEL_NAME }}
     steps:
-
       - uses: actions/checkout@v4
-
-      - name: Print checkout done
-        run: echo "Checkout completed successfully."
-
-      - name: Print matrix values
-        run: |
-          echo "Deployment Type: ${{ matrix.deploymentType }}"
 
       - name: run-deployments
         id: run-dev-deployments
