@@ -14,9 +14,16 @@ jobs:
       outcome: ${{ steps.run-deployments.outcome }}
       channel: ${{ vars.CHANNEL_NAME }}
     steps:
+
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.ref_name }}
+
+      - name: Print checkout done
+        run: echo "Checkout completed successfully."
+
+      - name: Print matrix values
+        run: |
+          echo "Deployment Type: ${{ matrix.deploymentType }}"
+
       - name: run-deployments
         id: run-deployments
         uses: ./.github/actions/name-generator
