@@ -19875,7 +19875,7 @@ Support boolean input list: \`true | True | TRUE | false | False | FALSE\``);
 
 // index.js
 var core = __toESM(require_core(), 1);
-var catNames = [
+var deploymentNames = [
   "Whiskers",
   "Fluffy",
   "Mittens",
@@ -19892,20 +19892,20 @@ var catNames = [
   "Cleo",
   "Smokey"
 ];
-function getRandomCatName() {
-  const randomIndex = Math.floor(Math.random() * catNames.length);
-  return catNames[randomIndex];
+function getRandomDeploymentName() {
+  const randomIndex = Math.floor(Math.random() * deploymentNames.length);
+  return deploymentNames[randomIndex];
 }
 try {
-  const catType = core.getInput("catType");
+  const deploymentType = core.getInput("deploymentType");
   const path = core.getInput("path");
   console.log("path", path);
-  if (!catType) {
-    throw new Error("catType input is required");
+  if (!deploymentType) {
+    throw new Error("deploymentType input is required");
   }
-  console.log("running for catType", catType);
-  const catName = getRandomCatName();
-  core.setOutput("catName", catName + " the " + catType);
+  console.log("running for deploymentType", deploymentType);
+  const deploymentName = getRandomDeploymentName();
+  core.setOutput("deploymentName", deploymentName + " the " + deploymentType);
 } catch (error) {
   core.setFailed(error.message);
 }
