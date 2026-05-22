@@ -8,6 +8,8 @@ jobs:
     runs-on: self-hosted
     environment: dev
     strategy:
+      fail-fast: false # Continue running all jobs even if one fails
+      max-parallel: 2 # Limit the number of parallel jobs to 2
       matrix:
         country: [ us, ca, uk ]
         deploymentType: [ v1,v2 ]
