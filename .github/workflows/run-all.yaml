@@ -1,0 +1,21 @@
+name: run-all-deployments
+
+on: [ workflow_call ]
+
+jobs:
+  dev:
+    uses: ./.github/workflows/run-dev.yaml
+    secrets: inherit
+  prod:
+    strategy:
+      matrix:
+        include:
+          - deploymentType: v1
+            path: './somepath/1'
+          - deploymentType: v2
+            path: './somepath/2'
+    uses: ./.github/workflows/run-prod.yaml
+    with:
+      deploymentType: ${{ matrix.deploymentType }}
+      path: ${{ matrix.path }}
+    secrets: inherit

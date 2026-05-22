@@ -1,0 +1,12 @@
+name: 'run-deployments'
+description: 'This action runs the deployment script for a given deployment type.'
+inputs:
+    deploymentType:
+        type: string
+        description: Type of deployment to run
+outputs:
+    deploymentName:
+        description: "The generated  name"
+runs:
+  using: 'node24'
+  main: './../../../dist/run.cjs'

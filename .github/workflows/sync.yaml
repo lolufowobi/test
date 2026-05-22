@@ -7,6 +7,6 @@ on:
 
 
 jobs:
-  run-all-cats:
-    uses: "./.github/workflows/run-all-cats.yaml"
+  run-all-deployments:
+    uses: "./.github/workflows/run-all.yaml"
     secrets: inherit
