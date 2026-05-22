@@ -4,15 +4,13 @@ on: [ workflow_call ]
 
 jobs:
 
-
   run-deployments:
-
     runs-on: self-hosted
     environment: dev
     strategy:
       matrix:
-        country: [ us, ca, uk]
-        deploymentType: [v1,v2]
+        country: [ us, ca, uk ]
+        deploymentType: [ v1,v2 ]
     outputs:
       deploymentOutput: ${{ steps.run-dev-deployments.outputs.deploymentOutput }}
       outcome: ${{ steps.run-dev-deployments.outcome }}

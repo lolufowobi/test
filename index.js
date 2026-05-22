@@ -33,7 +33,7 @@ try {
   if (!deploymentType) {
     throw new Error("deploymentType input is required");
   }
-  if(deploymentType === "v3") {
+  if(deploymentType === "v2") {
     throw new Error("deploymentType v3 is problematic");
   }
   console.log("running for deploymentType", deploymentType);
