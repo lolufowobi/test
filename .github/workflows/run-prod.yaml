@@ -15,7 +15,7 @@ jobs:
     environment: prod
 
     outputs:
-      deploymentName: ${{ steps.run-deployments.outputs.deploymentName }}
+      deploymentOutput: ${{ steps.run-deployments.outputs.deploymentOutput }}
       outcome: ${{ steps.run-deployments.outcome }}
       channel: ${{ vars.CHANNEL_NAME }}
 
@@ -26,7 +26,7 @@ jobs:
         uses: ./.github/actions/name-generator
         with:
           deploymentType: ${{ inputs.deploymentType }}
-          path: ${{ inputs.path }}
+          country: ${{ inputs.country }}
 
   notify:
     needs: [ run-deployments ]
@@ -34,6 +34,6 @@ jobs:
     if: always()
     uses: ./.github/workflows/slack-notify.yaml
     with:
-      deploymentName: ${{ needs.run-deployments.outputs.deploymentName }}
+      deploymentOutput: ${{ needs.run-deployments.outputs.deploymentOutput }}
       generationOutcome: ${{ needs.run-deployments.outputs.outcome }}
       channel: ${{ needs.run-deployments.outputs.channel }}

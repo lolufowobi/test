@@ -11,9 +11,10 @@ jobs:
     environment: dev
     strategy:
       matrix:
-        deploymentType: [v1,v2,v3,v4]
+        country: [ us, ca, uk]
+        deploymentType: [v1,v2]
     outputs:
-      deploymentName: ${{ steps.run-dev-deployments.outputs.deploymentName }}
+      deploymentOutput: ${{ steps.run-dev-deployments.outputs.deploymentOutput }}
       outcome: ${{ steps.run-dev-deployments.outcome }}
       channel: ${{ vars.CHANNEL_NAME }}
     steps:
@@ -28,12 +29,14 @@ jobs:
         uses: ./.github/actions/name-generator
         with:
           deploymentType: ${{ matrix.deploymentType }}
+          country: ${{ matrix.country }}
+
 
   notify:
     needs: [ run-deployments ]
     if: always()
     uses: "./.github/workflows/slack-notify.yaml"
     with:
-      deploymentName: ${{ needs.run-deployments.outputs.deploymentName }}
+      deploymentOutput: ${{ needs.run-deployments.outputs.deploymentOutput }}
       generationOutcome: ${{ needs.run-deployments.outputs.outcome }}
       channel: ${{ needs.run-deployments.outputs.channel }}

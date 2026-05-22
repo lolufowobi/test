@@ -11,11 +11,11 @@ jobs:
 #      matrix:
 #        include:
 #          - deploymentType: v1
-#            path: './somepath/1'
+#            country: 'ca'
 #          - deploymentType: v2
-#            path: './somepath/2'
+#            country: 'us'
 #    uses: ./.github/workflows/run-prod.yaml
 #    with:
 #      deploymentType: ${{ matrix.deploymentType }}
-#      path: ${{ matrix.path }}
+#      country: ${{ matrix.country }}
 #    secrets: inherit

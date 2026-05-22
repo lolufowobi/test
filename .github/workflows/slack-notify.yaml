@@ -6,7 +6,7 @@ on:
         type: string
         required: true
         description: Outcome of the deployment name generation job (e.g., success, failure)
-      deploymentName:
+      deploymentOutput:
         type: string
         required: false
         description: Name of the deployment
@@ -23,7 +23,7 @@ jobs:
         shell: bash
         run: |
             if [ "${{ inputs.generationOutcome }}" == "success" ]; then
-                echo "Deployment name:  ${{ inputs.deploymentName }} sent to channel: ${{ inputs.channel }}"
+                echo "Deployment name:  ${{ inputs.deploymentOutput }} sent to channel: ${{ inputs.channel }}"
             else
                 echo "Deployment name generation failed."
             fi

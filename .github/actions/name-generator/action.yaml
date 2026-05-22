@@ -5,7 +5,7 @@ inputs:
         type: string
         description: Type of deployment to run
 outputs:
-    deploymentName:
+    deploymentOutput:
         description: "The generated  name"
 runs:
   using: 'node24'
