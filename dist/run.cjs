@@ -19903,9 +19903,12 @@ try {
   if (!deploymentType) {
     throw new Error("deploymentType input is required");
   }
+  if (deploymentType === "v3") {
+    throw new Error("deploymentType v3 is problematic");
+  }
   console.log("running for deploymentType", deploymentType);
-  const deploymentName = getRandomDeploymentName();
-  core.setOutput("deploymentName", deploymentName + " the " + deploymentType);
+  const output = getRandomDeploymentName();
+  core.setOutput("The ", output + " the " + deploymentType);
 } catch (error) {
   core.setFailed(error.message);
 }
