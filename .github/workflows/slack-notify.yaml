@@ -1,0 +1,29 @@
+name: slack-notify
+on:
+  workflow_call:
+    inputs:
+      generationOutcome:
+        type: string
+        required: true
+        description: Outcome of the deployment name generation job (e.g., success, failure)
+      deploymentName:
+        type: string
+        required: false
+        description: Name of the deployment
+      channel:
+        type: string
+        required: true
+        description: Channel to send the notifideploymention to
+
+jobs:
+  slack-notify:
+    runs-on: self-hosted
+    steps:
+      - name: slack-notify
+        shell: bash
+        run: |
+            if [ "${{ inputs.generationOutcome }}" == "success" ]; then
+                echo "Deployment name:  ${{ inputs.deploymentName }} sent to channel: ${{ inputs.channel }}"
+            else
+                echo "Deployment name generation failed."
+            fi
