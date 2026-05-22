@@ -25,7 +25,7 @@ jobs:
           echo "Deployment Type: ${{ matrix.deploymentType }}"
 
       - name: run-deployments
-        id: run-deployments
+        id: run-dev-deployments
         uses: ./.github/actions/name-generator
         with:
           deploymentType: ${{ matrix.deploymentType }}
